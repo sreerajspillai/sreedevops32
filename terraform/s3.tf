@@ -10,7 +10,12 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = local.effective_aws_region
+}
+
+locals {
+  # Terrakube variable values can be empty strings; fallback keeps provider valid.
+  effective_aws_region = trimspace(coalesce(var.aws_region, "")) != "" ? trimspace(coalesce(var.aws_region, "")) : "eu-west-1"
 }
 
 module "example_bucket" {
@@ -26,6 +31,11 @@ variable "aws_region" {
   description = "AWS region where the S3 bucket will be created."
   type        = string
   default     = "eu-west-1"
+
+  validation {
+    condition     = trimspace(coalesce(var.aws_region, "")) == "" || can(regex("^[a-z]{2}-[a-z]+-[0-9]$", trimspace(coalesce(var.aws_region, ""))))
+    error_message = "aws_region must be empty or match a valid region format such as eu-west-1."
+  }
 }
 
 variable "bucket_name_prefix" {
