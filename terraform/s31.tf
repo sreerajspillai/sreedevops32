@@ -41,13 +41,13 @@ variable "aws_region" {
 variable "bucket_name_prefix" {
   description = "Prefix used to build the S3 bucket name."
   type        = string
-  default     = "my-bucket"
+  default     = "my-S3-bucket"
 }
 
 variable "name_tag" {
   description = "Value for the Name tag on the S3 bucket."
   type        = string
-  default     = "My Bucket"
+  default     = "My S3 Bucket"
 }
 
 variable "environment" {
@@ -69,5 +69,5 @@ output "bucket_name" {
 
 output "bucket_arn" {
   description = "ARN of the created S3 bucket."
-  value       = module.example_bucket.bucket_arn
+  value       = module.bucket.bucket_arn
 }
