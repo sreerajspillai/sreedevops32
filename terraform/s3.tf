@@ -74,13 +74,13 @@ variable "tags" {
 variable "My_Bucket_name_prefix" {
   description = "Prefix used to build the second S3 bucket name."
   type        = string
-  default     = "my-second-example-bucket"
+  default     = "My-bucket"
 }
 
 variable "My_Bucket_name_tag" {
   description = "Value for the Name tag on the second S3 bucket."
   type        = string
-  default     = "My Second Example Bucket"
+  default     = "My Bucket"
 }
 
 variable "My_Bucket_tags" {
