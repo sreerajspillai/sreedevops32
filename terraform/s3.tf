@@ -27,6 +27,15 @@ module "example_bucket" {
   tags               = var.tags
 }
 
+module "My_Bucket" {
+  source = "./modules/s3"
+
+  bucket_name_prefix = var.My_Bucket_name_prefix
+  name_tag           = var.My_Bucket_name_tag
+  environment        = var.environment
+  tags               = var.My_Bucket_tags
+}
+
 variable "aws_region" {
   description = "AWS region where the S3 bucket will be created."
   type        = string
@@ -62,6 +71,24 @@ variable "tags" {
   default     = {}
 }
 
+variable "My_Bucket_name_prefix" {
+  description = "Prefix used to build the second S3 bucket name."
+  type        = string
+  default     = "my-second-example-bucket"
+}
+
+variable "My_Bucket_name_tag" {
+  description = "Value for the Name tag on the second S3 bucket."
+  type        = string
+  default     = "My Second Example Bucket"
+}
+
+variable "My_Bucket_tags" {
+  description = "Additional tags to apply to the second bucket."
+  type        = map(string)
+  default     = {}
+}
+
 output "bucket_name" {
   description = "Name of the created S3 bucket."
   value       = module.example_bucket.bucket_name
@@ -70,4 +97,14 @@ output "bucket_name" {
 output "bucket_arn" {
   description = "ARN of the created S3 bucket."
   value       = module.example_bucket.bucket_arn
+}
+
+output "My_Bucket_name" {
+  description = "Name of the second created S3 bucket."
+  value       = module.My_Bucket.bucket_name
+}
+
+output "My_Bucket_arn" {
+  description = "ARN of the second created S3 bucket."
+  value       = module.My_Bucket.bucket_arn
 }
