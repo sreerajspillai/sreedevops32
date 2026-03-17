@@ -41,7 +41,7 @@ variable "aws_region" {
 variable "bucket_name_prefix" {
   description = "Prefix used to build the S3 bucket name."
   type        = string
-  default     = "my-S3-bucket"
+  default     = "My-S3-bucket"
 }
 
 variable "name_tag" {
